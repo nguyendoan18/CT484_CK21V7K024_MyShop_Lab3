@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lab2_myshop/ui/products/products_manager.dart';
 import 'package:provider/provider.dart';
 import '../../models/product.dart';
+import 'edit_product_screen.dart';
 
 class UserProductListTile extends StatelessWidget {
   final Product product;
@@ -63,20 +64,30 @@ class UserProductListTile extends StatelessWidget {
     //   },
     //   color: Theme.of(context).primaryColor,
     // );
-    return Consumer<ProductsManager>(
-      builder: (ctx, productsManager, child) {
-        return ListView.builder(
-          itemCount: productsManager.itemCount,
-          itemBuilder: (ctx, i) => Column(
-            children: [
-              UserProductListTile(
-                productsManager.items[i],
-              ),
-              const Divider(),
-            ],
-          ),
+    // return Consumer<ProductsManager>(
+    //   builder: (ctx, productsManager, child) {
+    //     return ListView.builder(
+    //       itemCount: productsManager.itemCount,
+    //       itemBuilder: (ctx, i) => Column(
+    //         children: [
+    //           UserProductListTile(
+    //             productsManager.items[i],
+    //           ),
+    //           const Divider(),
+    //         ],
+    //       ),
+    //     );
+    //   },
+    // );
+    return IconButton(
+      icon: const Icon(Icons.edit),
+      onPressed: () {
+        Navigator.of(context).pushNamed(
+          EditProductScreen.routeName,
+          arguments: product.id,
         );
       },
+      color: Theme.of(context).primaryColor,
     );
   }
 }
